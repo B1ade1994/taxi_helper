@@ -7,6 +7,7 @@ class User < ApplicationRecord
   validates :phone_number,
             numericality: { only_integer: true },
             length: { is: 11 },
+            presence: true,
             uniqueness: true
 
   def email_required?

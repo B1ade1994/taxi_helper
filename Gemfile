@@ -14,8 +14,15 @@ gem 'devise', '~> 4.5.0'
 gem 'devise-jwt', '~> 0.5.8'
 gem 'responders'
 
-# group :development, :test do
-# end
+group :development, :test do
+  gem 'rspec-rails', '~> 3.8'
+  gem 'factory_bot_rails', '~> 4.0'
+end
+
+group :test do
+  gem 'shoulda-matchers', '4.0.0.rc1'
+  gem 'rails-controller-testing'
+end
 
 group :development do
   gem 'listen', '>= 3.0.5', '< 3.2'

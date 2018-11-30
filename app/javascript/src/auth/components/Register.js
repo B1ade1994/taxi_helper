@@ -74,12 +74,13 @@ export class Register extends Component {
               </Form.Field>
               <Form.Field>
                 <Checkbox
-                  label={<label>Я принимаю условия <Link to="/info/agreement">Пользовательского соглашения</Link></label>}
+                  label={<label>Я принимаю условия</label>}
                   onChange={handleCheckboxChange}
                 />
+                <Link to="/info/agreement"> Пользовательского соглашения</Link>
               </Form.Field>
 
-              <Button onClick={this.onBtnClickHandler} disabled={!this.validate() || isLoading} className={`black large fluid ${isLoading ? 'loading' : ''}`}>Зарегистрироваться</Button>
+              <Button onClick={this.onBtnClickHandler} className={`black large fluid ${isLoading ? 'loading' : ''}`}>Зарегистрироваться</Button>
             </Segment>
           </Form>
 
