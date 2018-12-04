@@ -23,7 +23,7 @@ ActiveRecord::Schema.define(version: 2018_11_24_203905) do
 
   create_table "users", force: :cascade do |t|
     t.string "phone_number", null: false
-    t.string "email", default: "", null: false
+    t.string "email"
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
@@ -33,6 +33,9 @@ ActiveRecord::Schema.define(version: 2018_11_24_203905) do
     t.datetime "last_sign_in_at"
     t.inet "current_sign_in_ip"
     t.inet "last_sign_in_ip"
+    t.string "verify_token"
+    t.boolean "verified", default: false
+    t.datetime "verify_sent_at"
     t.index ["phone_number"], name: "index_users_on_phone_number", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

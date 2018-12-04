@@ -3,8 +3,8 @@
 class AddDeviseToUsers < ActiveRecord::Migration[5.2]
   def self.up
     create_table :users do |t|
-      t.string :phone_number,       null: false
-      t.string :email,              null: false, default: ''
+      t.string :phone_number, null: false
+      t.string :email
       t.string :encrypted_password, null: false, default: ''
 
       ## Recoverable
@@ -34,9 +34,14 @@ class AddDeviseToUsers < ActiveRecord::Migration[5.2]
 
       # Uncomment below if timestamps were not included in your original model.
       # t.timestamps null: false
+
+      # sms token
+      t.string :verify_token
+      t.boolean :verified, default: false
+      t.datetime :verify_sent_at
     end
 
-    # add_index :users, :email,                unique: true
+    # add_index :users, :email,        unique: true
     add_index :users, :phone_number, unique: true
     add_index :users, :reset_password_token, unique: true
     # add_index :users, :confirmation_token,   unique: true

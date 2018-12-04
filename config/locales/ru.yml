@@ -9,6 +9,7 @@ ru:
     attributes:
       user:
         password: 'пароль'
+        phone_number: 'номер телефона'
   date:
     abbr_day_names:
     - Вс

@@ -22,7 +22,7 @@ export function register(phoneNumber, password, passwordConfirmation) {
       .then((response) => {
         const jwt = response.headers.authorization;
         setAuthToken(jwt);
-        dispatch(successRegister());
+        dispatch(successRegister(response.data));
       })
       .catch((error) => {
         dispatch(failRegister(error.response.data));

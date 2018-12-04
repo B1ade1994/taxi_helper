@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { Button, Input, Form, Message, Segment, Header, Grid, Image } from 'semantic-ui-react';
 import InputMask from 'react-input-mask';
 import PropTypes from 'prop-types';
-import _ from 'lodash';
 
 export class Login extends Component {
   onBtnClickHandler = (e) => {
@@ -34,7 +33,7 @@ export class Login extends Component {
           </Header>
           <Form className="large">
             <Segment className="stacked">
-              {_.has(errors, 'error') && (
+              {errors.error === 'Неверный номер телефона или пароль.' && (
                 <Message negative>
                   Пользователь с таким номером телефона или паролем не найден
                 </Message>

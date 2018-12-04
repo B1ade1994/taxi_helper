@@ -28,7 +28,11 @@ class LoginContainer extends Component {
     const { from } = this.props.location.state || { from: { pathname: '/test' } };
 
     if (auth.isAuthenticated) {
-      return <Redirect to={from} />;
+      if (auth.isVerified) {
+        return <Redirect to={from} />;
+      }
+
+      return <Redirect to="/verify" />;
     }
 
     return (

@@ -1,3 +1,7 @@
 .auth-form {
   max-width: 450px;
 }
+
+a.disabled {
+  pointer-events: none;
+}

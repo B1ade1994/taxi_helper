@@ -5,10 +5,10 @@ import { connect } from 'react-redux';
 import { BrowserRouter, Route, NavLink, Switch } from 'react-router-dom';
 
 import { logout, login } from 'src/auth/actions';
-import { RegisterContainer, LoginContainer } from 'src/auth';
+import { RegisterContainer, LoginContainer, VerifyContainer } from 'src/auth';
 import { PrivateRoute } from './components/PrivateRoute';
-import Home from './components/Home';
 import Test from './components/Test';
+import Home from './components/Home';
 import InfoAgreement from './components/InfoAgreement';
 
 class Layout extends Component {
@@ -58,6 +58,7 @@ class Layout extends Component {
                 <Route path="/info/agreement" component={InfoAgreement} />
                 <Route path="/login" component={LoginContainer} />
                 <Route path="/register" component={RegisterContainer} />
+                <PrivateRoute exact path="/verify" component={VerifyContainer} auth={this.props.auth} />
                 <PrivateRoute path="/test" component={Test} auth={this.props.auth} />
               </Switch>
             </div>

@@ -22,27 +22,10 @@ export function login(phoneNumber = null, password = null) {
       .then((response) => {
         const jwt = response.headers.authorization;
         setAuthToken(jwt);
-        dispatch(successLogin());
+        dispatch(successLogin(response.data));
       })
       .catch((error) => {
-        console.log(error.response.data);
         dispatch(failLogin({ errors: error.response.data }));
-      });
-  };
-}
-
-export function logout() {
-  return (dispatch) => {
-    dispatch(startLogin());
-
-    api.delete('/logout')
-      .then(() => {
-        setAuthToken(false);
-        dispatch({ type: loginConstants.LOGOUT });
-      })
-      .catch((error) => {
-        console.log(error.response.data);
-        // dispatch(failLogin({ errors: error.response.data }));
       });
   };
 }

@@ -32,7 +32,7 @@ class RegisterContainer extends Component {
     const { register, auth } = this.props;
 
     if (auth.isAuthenticated) {
-      return <Redirect to="/test" />;
+      return <Redirect to="/verify" />;
     }
 
     return (

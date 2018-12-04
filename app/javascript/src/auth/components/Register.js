@@ -80,7 +80,7 @@ export class Register extends Component {
                 <Link to="/info/agreement"> Пользовательского соглашения</Link>
               </Form.Field>
 
-              <Button onClick={this.onBtnClickHandler} className={`black large fluid ${isLoading ? 'loading' : ''}`}>Зарегистрироваться</Button>
+              <Button onClick={this.onBtnClickHandler} disabled={!this.validate() || isLoading} className={`black large fluid ${isLoading ? 'loading' : ''}`}>Зарегистрироваться</Button>
             </Segment>
           </Form>
 

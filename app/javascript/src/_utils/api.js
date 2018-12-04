@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { store } from 'src/store';
-import { loginConstants } from 'src/constants';
+import { logoutConstants } from 'src/constants';
 
 const API_ROOT = '/api/v1';
 const jwt = localStorage.getItem('jwt');
@@ -17,7 +17,7 @@ api.interceptors.response.use(
   (err) => {
     if (err.response.status === 401) {
       setAuthToken(false);
-      store.dispatch({ type: loginConstants.LOGOUT });
+      store.dispatch({ type: logoutConstants.LOGOUT_SUCCESS });
     }
 
     return Promise.reject(err);
