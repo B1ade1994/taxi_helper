@@ -5,8 +5,8 @@ function startVerify() {
   return { type: verifyConstants.VERIFY_REQUEST };
 }
 
-function successVerify(user) {
-  return { type: verifyConstants.VERIFY_SUCCESS, payload: user };
+function successVerify() {
+  return { type: verifyConstants.VERIFY_SUCCESS };
 }
 
 function failVerify(errors) {
@@ -31,8 +31,8 @@ export function verify(code) {
 
     const data = { code };
     api.put('/verify', data)
-      .then((response) => {
-        dispatch(successVerify(response.data));
+      .then(() => {
+        dispatch(successVerify());
       })
       .catch((error) => {
         dispatch(failVerify({ errors: error.response.data.errors }));

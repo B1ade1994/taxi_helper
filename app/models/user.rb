@@ -20,13 +20,13 @@ class User < ApplicationRecord
     false
   end
 
-  def generate_sms_token
+  def generate_verify_token!
     generate_verify_token
     save!
   end
 
-  def send_sms_token
-    send_verify_token
+  def send_verify_token
+    # send sms via backgroud job
   end
 
   def verify(token)
@@ -42,11 +42,5 @@ class User < ApplicationRecord
     def generate_verify_token
       self.verify_token = rand(0..99_999).to_s.rjust(5, '0')
       self.verify_sent_at = Time.now.utc
-
-      self.verify_token = '12345'
-    end
-
-    def send_verify_token
-      # send sms via backgroud job
     end
 end

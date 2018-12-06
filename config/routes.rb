@@ -16,8 +16,6 @@ Rails.application.routes.draw do
                    sign_out: 'logout',
                    registration: 'register'
                  }
-      # post :verify, controller: 'verify'
-      # put :verify, controller: 'verify'
       post :verify, to: 'verify#create'
       put :verify, to: 'verify#update'
 

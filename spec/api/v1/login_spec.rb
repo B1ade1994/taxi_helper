@@ -33,7 +33,7 @@ describe 'POST api/v1/login' do
       expect(response).to have_http_status(401)
     end
 
-    it 'return error message' do
+    it 'returns error message' do
       expect(json[:error]).to eq 'Вам необходимо войти в систему или зарегистрироваться.'
     end
   end

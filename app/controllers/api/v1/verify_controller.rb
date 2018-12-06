@@ -4,8 +4,8 @@ class Api::V1::VerifyController < Api::V1::BaseController
   def create
     return render json: { timeout: ['Время ожидания не истекло'] }, status: :unprocessable_entity if Time.now.utc - current_user.verify_sent_at <= 120.seconds
 
-    current_user.generate_sms_token
-    current_user.send_sms_token
+    current_user.generate_verify_token!
+    current_user.send_verify_token
 
     respond_with current_user
   end

@@ -18,7 +18,7 @@ class VerifyContainer extends Component {
             timer: prevState.timer - 1,
           }));
         } else {
-          clearInterval(this.interval);
+          this.setState({ timer: 0 })
         }
       },
       1000,
