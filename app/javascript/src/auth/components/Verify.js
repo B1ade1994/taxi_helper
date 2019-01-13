@@ -47,7 +47,6 @@ export class Verify extends Component {
                   name="code"
                   value={code}
                   onChange={handleChange}
-                  fluid
                 />
                 {_.has(errors, 'invalid_verify_token') && (<LabelError errors={errors.invalid_verify_token} />)}
               </Form.Field>

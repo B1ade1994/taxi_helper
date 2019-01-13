@@ -40,7 +40,7 @@ export class Login extends Component {
               )}
               <Form.Field>
                 <label htmlFor="phoneNumber">Номер телефона</label>
-                <div className="ui fluid input">
+                <div className="ui input">
                   <InputMask
                     name="phoneNumber"
                     value={phoneNumber}
@@ -58,7 +58,6 @@ export class Login extends Component {
                   onChange={handleChange}
                   type="password"
                   placeholder="Введите пароль"
-                  fluid
                 />
               </Form.Field>
 

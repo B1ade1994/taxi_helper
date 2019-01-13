@@ -25,7 +25,7 @@ class LoginContainer extends Component {
     const { phoneNumber, password } = this.state;
     const { login, auth } = this.props;
 
-    const { from } = this.props.location.state || { from: { pathname: '/test' } };
+    const { from } = this.props.location.state || { from: { pathname: '/profile' } };
 
     if (auth.isAuthenticated) {
       if (auth.isVerified) {

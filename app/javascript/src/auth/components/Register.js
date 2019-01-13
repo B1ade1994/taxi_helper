@@ -37,7 +37,7 @@ export class Register extends Component {
             <Segment className="stacked">
               <Form.Field error={!!errors.phone_number}>
                 <label htmlFor="phoneNumber">Номер телефона</label>
-                <div className="ui fluid input">
+                <div className="ui input">
                   <InputMask
                     name="phoneNumber"
                     value={phoneNumber}
@@ -56,7 +56,6 @@ export class Register extends Component {
                   onChange={handleChange}
                   type="password"
                   placeholder="Введите пароль"
-                  fluid
                 />
                 {_.has(errors, 'password') && (<LabelError errors={errors.password} />)}
               </Form.Field>
@@ -68,7 +67,6 @@ export class Register extends Component {
                   onChange={handleChange}
                   type="password"
                   placeholder="Подтвердите пароль"
-                  fluid
                 />
                 {_.has(errors, 'password_confirmation') && (<LabelError errors={errors.password_confirmation} />)}
               </Form.Field>

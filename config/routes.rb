@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   get 'test', to: 'welcome#index'
   get 'info/agreement', to: 'welcome#index'
   get 'verify', to: 'welcome#index'
+  get 'profile', to: 'welcome#index'
 
   namespace :api, defaults: { format: 'json' } do
     namespace :v1 do
@@ -19,11 +20,7 @@ Rails.application.routes.draw do
       post :verify, to: 'verify#create'
       put :verify, to: 'verify#update'
 
-      resources :users, only: %i[index] do
-        collection do
-          # ...
-        end
-      end
+      put :profile, to: 'users#profile'
     end
   end
 end

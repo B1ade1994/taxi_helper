@@ -1,20 +1,27 @@
-import { loginConstants, registerConstants, logoutConstants, verifyConstants } from 'src/constants';
+import { loginConstants, registerConstants, logoutConstants, verifyConstants, commonConstants } from 'src/constants';
 
 const initialState = {
+  appLoaded: false,
   isAuthenticated: false,
   isVerified: false,
-  userRole: null,
+  role: null,
   isLoading: false,
   errors: {},
 };
 
 export function authReducer(state = initialState, action) {
   switch (action.type) {
+    case commonConstants.APP_LOADED:
+      return { ...state, appLoaded: true };
+
+    case commonConstants.SET_ROLE:
+      return { ...state, role: action.payload };
+
     case registerConstants.REGISTER_REQUEST: case loginConstants.LOGIN_REQUEST: case verifyConstants.VERIFY_REQUEST: case verifyConstants.UPDATE_VERIFY_TOKEN_REQUEST: case logoutConstants.LOGOUT_REQUEST:
       return { ...state, isLoading: true, errors: {} };
 
     case registerConstants.REGISTER_SUCCESS: case loginConstants.LOGIN_SUCCESS:
-      return { ...state, isAuthenticated: true, isVerified: action.payload.verified, isLoading: false, errors: {} };
+      return { ...state, isAuthenticated: true, isVerified: action.payload.verified, role: action.payload.role, isLoading: false, errors: {} };
 
     case registerConstants.REGISTER_FAILURE: case loginConstants.LOGIN_FAILURE: case verifyConstants.VERIFY_FAILURE: case verifyConstants.UPDATE_VERIFY_TOKEN_FAILURE:
       return { ...state, errors: action.payload.errors, isLoading: false };
@@ -26,7 +33,7 @@ export function authReducer(state = initialState, action) {
       return { ...state, isLoading: false, errors: {} };
 
     case logoutConstants.LOGOUT_SUCCESS:
-      return initialState;
+      return { ...initialState, appLoaded: true };
 
     default:
       return state;

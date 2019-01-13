@@ -24,5 +24,6 @@ module TaxiHelper
     config.load_defaults 5.2
     config.generators.system_tests = nil
     config.i18n.default_locale = :ru
+    config.active_record.index_nested_attribute_errors = true
   end
 end

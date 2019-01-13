@@ -10,10 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_24_203905) do
+ActiveRecord::Schema.define(version: 2019_01_13_122254) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "cars", force: :cascade do |t|
+    t.bigint "user_id"
+    t.string "brand"
+    t.string "model"
+    t.string "color"
+    t.string "number"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_cars_on_user_id"
+  end
 
   create_table "jwt_blacklist", force: :cascade do |t|
     t.string "jti", null: false
@@ -36,6 +47,10 @@ ActiveRecord::Schema.define(version: 2018_11_24_203905) do
     t.string "verify_token"
     t.boolean "verified", default: false
     t.datetime "verify_sent_at"
+    t.integer "role", default: 0
+    t.string "name"
+    t.string "personal_account"
+    t.float "rating", default: 0.0
     t.index ["phone_number"], name: "index_users_on_phone_number", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

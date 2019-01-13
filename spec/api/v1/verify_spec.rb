@@ -20,7 +20,8 @@ describe 'Verify API' do
 
       it 'returns timeout error if less than 120 seconds have passed from the last request' do
         post '/api/v1/verify', headers: auth_headers
-        expect(json[:timeout]).to eq(['Время ожидания не истекло'])
+        p 
+        expect(json[:errors][:timeout]).to eq(['Время ожидания не истекло'])
       end
     end
 

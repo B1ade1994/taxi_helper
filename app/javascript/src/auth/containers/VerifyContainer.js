@@ -18,7 +18,7 @@ class VerifyContainer extends Component {
             timer: prevState.timer - 1,
           }));
         } else {
-          this.setState({ timer: 0 })
+          this.setState({ timer: 0 });
         }
       },
       1000,
@@ -44,7 +44,7 @@ class VerifyContainer extends Component {
     const { auth, verify, updateVerifyToken } = this.props;
 
     if (auth.isVerified) {
-      return <Redirect to="/test" />;
+      return <Redirect to="/profile" />;
     }
 
     return (

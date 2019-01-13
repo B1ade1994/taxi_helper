@@ -9,7 +9,7 @@ class Api::V1::BaseController < ActionController::API
   end
 
   def check_if_unverified
-    return render json: { verify_phone_number: 'Необходимо подтвердить номер телефона.' }, status: 401 unless current_user.verified?
+    return render json: { errors: { verify_phone_number: ['Необходимо подтвердить номер телефона.'] } }, status: 401 unless current_user.verified?
   end
 
   def respond_with(*resources, &block)
@@ -33,5 +33,5 @@ class Api::V1::BaseController < ActionController::API
     else
       raise ActionController::UnknownFormat
     end
-  end  
+  end
 end

@@ -1,4 +1,4 @@
-import { loginConstants } from 'src/constants';
+import { loginConstants, commonConstants, profileConstants } from 'src/constants';
 import { api, setAuthToken } from 'src/_utils';
 
 function startLogin() {
@@ -13,6 +13,14 @@ function failLogin(errors) {
   return { type: loginConstants.LOGIN_FAILURE, payload: errors };
 }
 
+function loadProfile(profile) {
+  return { type: profileConstants.LOAD_PROFILE, payload: profile };
+}
+
+function appLoaded() {
+  return { type: commonConstants.APP_LOADED };
+}
+
 export function login(phoneNumber = null, password = null) {
   return (dispatch) => {
     dispatch(startLogin());
@@ -20,12 +28,23 @@ export function login(phoneNumber = null, password = null) {
     const data = { api_v1_user: { phoneNumber, password } };
     api.post('/login', data)
       .then((response) => {
+        const { data } = response;
         const jwt = response.headers.authorization;
         setAuthToken(jwt);
-        dispatch(successLogin(response.data));
+
+        dispatch(appLoaded());
+        dispatch(loadProfile(data));
+        dispatch(successLogin(data));
       })
       .catch((error) => {
+        dispatch(appLoaded());
         dispatch(failLogin({ errors: error.response.data }));
       });
+  };
+}
+
+export function onAppLoad() {
+  return (dispatch) => {
+    dispatch(appLoaded());
   };
 }

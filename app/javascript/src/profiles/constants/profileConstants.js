@@ -1,0 +1,6 @@
+export const profileConstants = {
+  LOAD_PROFILE: 'LOAD_PROFILE',
+  SAVE_REQUEST: 'SAVE_REQUEST',
+  SAVE_SUCCESS: 'SAVE_SUCCESS',
+  SAVE_FAILURE: 'SAVE_FAILURE',
+};
