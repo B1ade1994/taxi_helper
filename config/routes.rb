@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   get 'test', to: 'welcome#index'
   get 'info/agreement', to: 'welcome#index'
   get 'verify', to: 'welcome#index'
-  get 'profile', to: 'welcome#index'
+  get 'profile/edit', to: 'welcome#index'
 
   namespace :api, defaults: { format: 'json' } do
     namespace :v1 do

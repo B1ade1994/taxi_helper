@@ -44,7 +44,7 @@ class VerifyContainer extends Component {
     const { auth, verify, updateVerifyToken } = this.props;
 
     if (auth.isVerified) {
-      return <Redirect to="/profile" />;
+      return <Redirect to="/profile/edit" />;
     }
 
     return (

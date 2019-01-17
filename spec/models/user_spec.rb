@@ -3,12 +3,23 @@ require 'rails_helper'
 RSpec.describe User, type: :model do
   subject { build(:user) }
 
+  context 'associations' do
+    it { should have_many(:cars) }
+  end
+
   context 'validations' do
-    it { should validate_presence_of(:phone_number) }
-    it { should validate_length_of(:phone_number).is_equal_to(11) }
-    it { should validate_numericality_of(:phone_number) }
-    it { should validate_uniqueness_of(:phone_number).case_insensitive }
-    it { should validate_presence_of(:password) }
+    context 'basic' do
+      it { should validate_presence_of(:phone_number) }
+      it { should validate_length_of(:phone_number).is_equal_to(11) }
+      it { should validate_numericality_of(:phone_number) }
+      it { should validate_uniqueness_of(:phone_number).case_insensitive }
+      it { should validate_presence_of(:password) }
+    end
+    context 'when verified' do
+      before { subject.update_attributes(verified: true) }
+
+      it { should validate_presence_of(:name) }
+    end
   end
 
   context 'callbacks' do

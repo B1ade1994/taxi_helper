@@ -3,7 +3,7 @@ require 'devise/jwt/test_helpers'
 
 describe 'Verify API' do
   let!(:user) { create(:user) }
-  let(:headers) {{ 'Accept' => 'application/json', 'Content-Type' => 'application/json' }}
+  let(:headers) { { 'Accept' => 'application/json', 'Content-Type' => 'application/json' } }
   let(:auth_headers) { Devise::JWT::TestHelpers.auth_headers(headers, user) }
 
   describe 'POST /api/v1/verify' do
@@ -20,7 +20,7 @@ describe 'Verify API' do
 
       it 'returns timeout error if less than 120 seconds have passed from the last request' do
         post '/api/v1/verify', headers: auth_headers
-        p 
+
         expect(json[:errors][:timeout]).to eq(['Время ожидания не истекло'])
       end
     end
@@ -44,7 +44,7 @@ describe 'Verify API' do
       context 'invalid token' do
         it 'returns invalid verify token error' do
           put '/api/v1/verify', params: { code: '123' }.to_json, headers: auth_headers
-          expect(json[:errors][:invalid_verify_token]).to eq(["Введен неверный код"])
+          expect(json[:errors][:invalid_verify_token]).to eq(['Введен неверный код'])
         end
       end
     end

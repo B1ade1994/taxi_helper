@@ -29,8 +29,7 @@ export function verify(code) {
   return (dispatch) => {
     dispatch(startVerify());
 
-    const data = { code };
-    api.put('/verify', data)
+    api.put('/verify', { code })
       .then(() => {
         dispatch(successVerify());
       })

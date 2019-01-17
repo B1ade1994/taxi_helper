@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { Button, Form } from 'semantic-ui-react';
+import { CarListForm } from 'src/profiles/components';
+import _ from 'lodash';
 import PropTypes from 'prop-types';
-import { CarList } from 'src/profiles/components';
 
-export class Profile extends Component {
+export class ProfileForm extends Component {
   onSubmitBtnClickHandler = (e) => {
     e.preventDefault();
 
@@ -38,6 +39,7 @@ export class Profile extends Component {
             onChange={onChange}
             placeholder="Лицевой счет"
             width={14}
+            error={_.has(errors, 'personal_account')}
           />
         </Form.Group>
 
@@ -47,14 +49,16 @@ export class Profile extends Component {
           value={name}
           onChange={onChange}
           placeholder="Имя"
+          error={_.has(errors, 'name')}
         />
 
         {role === 'driver' && (
-          <CarList
+          <CarListForm
             cars={cars}
             onCarChange={onCarChange}
             onAddCar={onAddCar}
             onRemoveCar={onRemoveCar}
+            errors={errors}
           />
         )}
 
@@ -64,7 +68,7 @@ export class Profile extends Component {
   }
 }
 
-Profile.propTypes = {
+ProfileForm.propTypes = {
   role: PropTypes.string.isRequired,
   personalAccount: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,

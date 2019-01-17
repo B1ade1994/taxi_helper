@@ -1,13 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Profile } from 'src/profiles/components';
+import { ProfileForm } from 'src/profiles/components';
 import { saveProfile } from 'src/profiles/actions';
 
-class ProfileContainer extends Component {
-  // state = {
-  //   profile: this.props.profile,
-  // }
-
+class ProfileFormContainer extends Component {
   componentWillMount() {
     this.setState({ profile: this.props.profile });
   }
@@ -31,14 +27,11 @@ class ProfileContainer extends Component {
   handleAddCar = () => {
     const { profile } = this.state;
     const car = {
-      id: null,
       brand: '',
       model: '',
       color: '',
       number: '',
       photo: '',
-      // _destroy: false,
-      errors: {},
     };
 
     profile.cars.push(car);
@@ -54,11 +47,11 @@ class ProfileContainer extends Component {
 
   render() {
     const { role, personalAccount, name, photo, cars } = this.state.profile;
-    const { isLoading, errors } = this.props.profile;
     const { saveProfile } = this.props;
+    const { isLoading, errors } = this.props.profile;
 
     return (
-      <Profile
+      <ProfileForm
         role={role}
         personalAccount={personalAccount || ''}
         name={name || ''}
@@ -88,5 +81,5 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-const connectedProfile = connect(mapStateToProps, mapDispatchToProps)(ProfileContainer);
-export { connectedProfile as ProfileContainer };
+const connectedProfileForm = connect(mapStateToProps, mapDispatchToProps)(ProfileFormContainer);
+export { connectedProfileForm as ProfileFormContainer };

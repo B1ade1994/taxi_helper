@@ -8,7 +8,7 @@ import { Dimmer, Loader, Segment } from 'semantic-ui-react';
 import { PrivateRoute } from './components/PrivateRoute';
 import { onAppLoad, login, logout } from 'src/auth/actions';
 import { RegisterContainer, LoginContainer, VerifyContainer } from 'src/auth';
-import { ProfileContainer } from 'src/profiles';
+import { ProfileFormContainer } from 'src/profiles';
 
 import Home from './components/Home';
 import InfoAgreement from './components/InfoAgreement';
@@ -67,7 +67,7 @@ class Layout extends Component {
                       <Route path="/login" component={LoginContainer} />
                       <Route path="/register" component={RegisterContainer} />
                       <PrivateRoute exact path="/verify" component={VerifyContainer} auth={this.props.auth} />
-                      <PrivateRoute exact path="/profile" component={ProfileContainer} auth={this.props.auth} />
+                      <PrivateRoute exact path="/profile/edit" component={ProfileFormContainer} auth={this.props.auth} />
                     </Switch>
                   </div>
                 </div>

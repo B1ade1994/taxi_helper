@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Form, Button } from 'semantic-ui-react';
+import _ from 'lodash';
 
-export class Car extends Component {
+export class CarForm extends Component {
   handleRemoveCarClick = (e) => {
     e.preventDefault();
     const { car, onRemoveCar } = this.props;
@@ -16,8 +17,8 @@ export class Car extends Component {
   }
 
   render() {
-    const { car } = this.props;
-    const { brand, model, color, number, photo, errors } = car;
+    const { car, errors } = this.props;
+    const { brand, model, color, number, photo } = car;
 
     return (
       <Form.Group>
@@ -27,6 +28,7 @@ export class Car extends Component {
           value={brand}
           onChange={this.handleCarChange}
           placeholder="Марка"
+          error={_.has(errors, 'brand')}
         />
         <Form.Input
           label="Модель"
@@ -34,6 +36,7 @@ export class Car extends Component {
           value={model}
           onChange={this.handleCarChange}
           placeholder="Модель"
+          error={_.has(errors, 'model')}
         />
         <Form.Input
           label="Цвет"
@@ -41,6 +44,7 @@ export class Car extends Component {
           value={color}
           onChange={this.handleCarChange}
           placeholder="Цвет"
+          error={_.has(errors, 'color')}
         />
         <Form.Input
           label="Гос. номер"
@@ -48,6 +52,7 @@ export class Car extends Component {
           value={number}
           onChange={this.handleCarChange}
           placeholder="Гос. номер"
+          error={_.has(errors, 'number')}
         />
         <Form.Field>
           <label htmlFor="trash_btn" style={{ opacity: 0 }}>Удалить</label>
@@ -58,7 +63,7 @@ export class Car extends Component {
   }
 }
 
-Car.propTypes = {
+CarForm.propTypes = {
   car: PropTypes.shape({
     id: PropTypes.number,
     brand: PropTypes.string.isRequired,
@@ -67,8 +72,8 @@ Car.propTypes = {
     number: PropTypes.string.isRequired,
     // photo: PropTypes.string.isRequired,
     _destroy: PropTypes.bool,
-    errors: PropTypes.object,
   }).isRequired,
   onCarChange: PropTypes.func.isRequired,
   onRemoveCar: PropTypes.func.isRequired,
+  errors: PropTypes.object.isRequired,
 };

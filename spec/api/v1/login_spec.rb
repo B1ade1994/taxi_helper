@@ -12,7 +12,7 @@ describe 'POST api/v1/login' do
     }
   end
 
-  context 'when params are correct' do
+  context 'with valid params' do
     before do
       post url, params: params
     end
@@ -26,7 +26,7 @@ describe 'POST api/v1/login' do
     end
   end
 
-  context 'when params are incorrect' do
+  context 'with invalid params' do
     before { post url }
 
     it 'returns 401' do

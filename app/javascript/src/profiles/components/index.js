@@ -1,3 +1,3 @@
-export * from './Profile';
-export * from './Car';
-export * from './CarList';
+export * from './ProfileForm';
+export * from './CarForm';
+export * from './CarListForm';

@@ -9,12 +9,14 @@ class User < ApplicationRecord
             presence: true,
             uniqueness: true
 
+  validates :name, presence: true, if: proc { |obj| obj.verified? && !obj.verified_changed? }
+
   before_create :generate_verify_token
   after_commit :send_verify_token, on: :create
 
   has_many :cars
 
-  accepts_nested_attributes_for :cars, allow_destroy: true, reject_if: :all_blank
+  accepts_nested_attributes_for :cars, allow_destroy: true
 
   enum role: { driver: 0, dispatcher: 1 }
 

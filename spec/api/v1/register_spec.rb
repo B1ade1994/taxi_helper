@@ -11,7 +11,7 @@ describe 'POST api/v1/register' do
     }
   end
 
-  context 'when short password' do
+  context 'with short password' do
     before do
       post url, params: {
         api_v1_user: {
@@ -30,7 +30,7 @@ describe 'POST api/v1/register' do
     end
   end
 
-  context 'when passwords do not match' do
+  context 'with passwords do not match' do
     before do
       post url, params: {
         api_v1_user: {
@@ -50,7 +50,7 @@ describe 'POST api/v1/register' do
     end
   end
 
-  context 'when user is unauthenticated' do
+  context 'with user is unauthenticated' do
     before { post url, params: params }
 
     it 'returns 201' do
@@ -66,7 +66,7 @@ describe 'POST api/v1/register' do
     end
   end
 
-  context 'when user already exists' do
+  context 'with user already exists' do
     before do
       create(:user)
       post url, params: params
