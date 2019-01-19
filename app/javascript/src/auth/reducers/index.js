@@ -5,6 +5,7 @@ const initialState = {
   isAuthenticated: false,
   isVerified: false,
   role: null,
+  name: null,
   isLoading: false,
   errors: {},
 };
@@ -14,14 +15,14 @@ export function authReducer(state = initialState, action) {
     case commonConstants.APP_LOADED:
       return { ...state, appLoaded: true };
 
-    case commonConstants.SET_ROLE:
-      return { ...state, role: action.payload };
+    case commonConstants.SET_PROFILE_ATTRS:
+      return { ...state, role: action.payload.role, name: action.payload.name };
 
     case registerConstants.REGISTER_REQUEST: case loginConstants.LOGIN_REQUEST: case verifyConstants.VERIFY_REQUEST: case verifyConstants.UPDATE_VERIFY_TOKEN_REQUEST: case logoutConstants.LOGOUT_REQUEST:
       return { ...state, isLoading: true, errors: {} };
 
     case registerConstants.REGISTER_SUCCESS: case loginConstants.LOGIN_SUCCESS:
-      return { ...state, isAuthenticated: true, isVerified: action.payload.verified, role: action.payload.role, isLoading: false, errors: {} };
+      return {...state, isAuthenticated: true, isVerified: action.payload.verified, role: action.payload.role, name: action.payload.name || action.payload.phoneNumber, isLoading: false, errors: {} };
 
     case registerConstants.REGISTER_FAILURE: case loginConstants.LOGIN_FAILURE: case verifyConstants.VERIFY_FAILURE: case verifyConstants.UPDATE_VERIFY_TOKEN_FAILURE:
       return { ...state, errors: action.payload.errors, isLoading: false };

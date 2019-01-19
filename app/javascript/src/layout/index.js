@@ -3,15 +3,12 @@ import './layout.scss';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { BrowserRouter, Route, NavLink, Switch } from 'react-router-dom';
-import { Loader } from 'semantic-ui-react';
+import { Menu, Dropdown, Container, Loader } from 'semantic-ui-react';
 
 import { onAppLoad, login, logout } from 'src/auth/actions';
 import { RegisterContainer, LoginContainer, VerifyContainer } from 'src/auth';
 import { ProfileContainer, ProfileFormContainer } from 'src/profiles';
-import { PrivateRoute } from './components/PrivateRoute';
-
-import Home from './components/Home';
-import InfoAgreement from './components/InfoAgreement';
+import { PrivateRoute, Home, InfoAgreement, Help } from './components';
 
 class Layout extends Component {
   componentWillMount() {
@@ -25,15 +22,25 @@ class Layout extends Component {
   }
 
   render() {
-    const { isAuthenticated, appLoaded } = this.props.auth;
+    const { isAuthenticated, appLoaded, name } = this.props.auth;
 
     const authLinks = (
       <React.Fragment>
-        <NavLink className="item" to="/profile">Профиль</NavLink>
+        <Menu.Item name="TaxiHelper" />
+        <Menu.Item name="Заказы" />
 
-        <div className="right menu">
-          <NavLink className="right item" onClick={this.props.logout} exact to="/">Выйти</NavLink>
-        </div>
+        <Menu.Menu position="right">
+          <Dropdown item text={name} pointing>
+            <Dropdown.Menu>
+              <Dropdown.Item as={NavLink} to="/profile" exact>Мой профиль</Dropdown.Item>
+              <Dropdown.Divider />
+              <Dropdown.Item as={NavLink} to="/profile/edit" exact>Редактировать</Dropdown.Item>
+              <Dropdown.Item as={NavLink} to="/help" exact>Помощь</Dropdown.Item>
+              <Dropdown.Divider />
+              <Dropdown.Item as={NavLink} onClick={this.props.logout} to="/" exact>Выйти</Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
+        </Menu.Menu>
       </React.Fragment>
     );
 
@@ -41,10 +48,10 @@ class Layout extends Component {
       <React.Fragment>
         <NavLink className="item" exact to="/">Новости</NavLink>
 
-        <div className="right menu">
+        <Menu.Menu position="right">
           <NavLink className="right item" to="/login">Войти</NavLink>
           <NavLink className="right item" to="/register">Регистрация</NavLink>
-        </div>
+        </Menu.Menu>
       </React.Fragment>
     );
 
@@ -52,27 +59,24 @@ class Layout extends Component {
       return (
         <BrowserRouter>
           <React.Fragment>
-            <div className="ui inverted menu attached">
-              <div className="ui container">
+            <Menu inverted attached>
+              <Container>
                 {isAuthenticated ? authLinks : guestLinks}
-              </div>
-            </div>
+              </Container>
+            </Menu>
             <div className="wrapper">
-              <div className="ui container">
-                <div className="ui grid">
-                  <div className="column">
-                    <Switch>
-                      <Route exact path="/" component={Home} />
-                      <Route path="/info/agreement" component={InfoAgreement} />
-                      <Route path="/login" component={LoginContainer} />
-                      <Route path="/register" component={RegisterContainer} />
-                      <PrivateRoute exact path="/verify" component={VerifyContainer} auth={this.props.auth} />
-                      <PrivateRoute exact path="/profile" component={ProfileContainer} auth={this.props.auth} />
-                      <PrivateRoute exact path="/profile/edit" component={ProfileFormContainer} auth={this.props.auth} />
-                    </Switch>
-                  </div>
-                </div>
-              </div>
+              <Container>
+                <Switch>
+                  <Route exact path="/" component={Home} />
+                  <Route path="/info/agreement" component={InfoAgreement} />
+                  <Route path="/login" component={LoginContainer} />
+                  <Route path="/register" component={RegisterContainer} />
+                  <PrivateRoute exact path="/help" component={Help} auth={this.props.auth} />
+                  <PrivateRoute exact path="/verify" component={VerifyContainer} auth={this.props.auth} />
+                  <PrivateRoute exact path="/profile" component={ProfileContainer} auth={this.props.auth} />
+                  <PrivateRoute exact path="/profile/edit" component={ProfileFormContainer} auth={this.props.auth} />
+                </Switch>
+              </Container>
             </div>
           </React.Fragment>
         </BrowserRouter>

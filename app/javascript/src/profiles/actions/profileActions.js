@@ -13,27 +13,28 @@ function failSave(errors) {
   return { type: profileConstants.SAVE_FAILURE, payload: errors };
 }
 
-function setRole(role) {
-  return { type: commonConstants.SET_ROLE, payload: role };
+function setProfileAttrs(data) {
+  return { type: commonConstants.SET_PROFILE_ATTRS, payload: data };
 }
 
 function loadProfile(profile) {
   return { type: profileConstants.LOAD_PROFILE, payload: profile };
 }
 
-export function saveProfile(profile) {
+export function saveProfile(profile, ownProps) {
   return (dispatch) => {
     dispatch(startSave());
 
     api.put('/profile', { user: profile })
       .then(() => {
-        dispatch(setRole(profile.role));
+        dispatch(setProfileAttrs({ role: profile.role, name: profile.name }));
 
         profile.cars = profile.cars_attributes;
         delete profile.cars_attributes;
 
         dispatch(loadProfile(profile));
         dispatch(successSave());
+        ownProps.history.push('/profile');
       })
       .catch((error) => {
         dispatch(failSave({ errors: error.response.data.errors }));

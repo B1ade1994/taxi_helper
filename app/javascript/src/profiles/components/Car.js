@@ -12,7 +12,7 @@ export class Car extends Component {
         <Image size="medium" src="https://i.ytimg.com/vi/cFmFACENiGs/maxresdefault.jpg" />
 
         <Card.Content>
-          <Grid centered="true">
+          <Grid centered>
             <Grid.Column width="6">
               <Card.Meta>Марка</Card.Meta>
               <Card.Header>{brand}</Card.Header>

@@ -84,9 +84,9 @@ const mapStateToProps = (store) => {
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    saveProfile: profile => dispatch(saveProfile(profile)),
+    saveProfile: profile => dispatch(saveProfile(profile, ownProps)),
   };
 };
 

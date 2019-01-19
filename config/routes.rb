@@ -3,8 +3,8 @@ Rails.application.routes.draw do
 
   get 'login', to: 'welcome#index'
   get 'register', to: 'welcome#index'
-  get 'test', to: 'welcome#index'
   get 'info/agreement', to: 'welcome#index'
+  get 'help', to: 'welcome#index'
   get 'verify', to: 'welcome#index'
   get 'profile', to: 'welcome#index'
   get 'profile/edit', to: 'welcome#index'

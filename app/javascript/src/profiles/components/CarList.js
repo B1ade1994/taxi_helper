@@ -12,7 +12,7 @@ export class CarList extends Component {
 
   render() {
     return (
-      <Card.Group centered="true">
+      <Card.Group centered>
         {this.renderCars()}
       </Card.Group>
     );

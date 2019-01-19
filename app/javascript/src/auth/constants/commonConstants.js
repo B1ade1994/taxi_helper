@@ -1,4 +1,4 @@
 export const commonConstants = {
   APP_LOADED: 'APP_LOADED',
-  SET_ROLE: 'SET_ROLE',
+  SET_PROFILE_ATTRS: 'SET_PROFILE_ATTRS',
 };
