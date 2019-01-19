@@ -31,6 +31,8 @@ export class CarListForm extends Component {
       <React.Fragment>
         {this.renderCars()}
         <Button type="button" onClick={onAddCar} className="black">Добавить машину</Button>
+        <br />
+        <br />
       </React.Fragment>
     );
   }

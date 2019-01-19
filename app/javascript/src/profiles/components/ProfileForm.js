@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { Button, Form } from 'semantic-ui-react';
 import { CarListForm } from 'src/profiles/components';
 import _ from 'lodash';
@@ -14,7 +15,7 @@ export class ProfileForm extends Component {
   }
 
   render() {
-    const { role, personalAccount, name, photo, cars, onChange, onCarChange, onAddCar, onRemoveCar, isLoading, errors } = this.props;
+    const { role, personalAccount, name, photo, cars, onChange, onCarChange, onAddCar, onRemoveCar, isLoading, errors, canBackBtn } = this.props;
 
     return (
       <Form loading={isLoading} onSubmit={this.onSubmitBtnClickHandler}>
@@ -62,6 +63,11 @@ export class ProfileForm extends Component {
           />
         )}
 
+        {canBackBtn && (
+          <Link to="/profile">
+            <Button secondary>Назад</Button>
+          </Link>
+        )}
         <Button type="submit" className="black">Сохранить</Button>
       </Form>
     );
@@ -81,4 +87,5 @@ ProfileForm.propTypes = {
   saveProfile: PropTypes.func.isRequired,
   isLoading: PropTypes.bool.isRequired,
   errors: PropTypes.object.isRequired,
+  canBackBtn: PropTypes.bool.isRequired,
 };

@@ -50,6 +50,14 @@ class ProfileFormContainer extends Component {
     const { saveProfile } = this.props;
     const { isLoading, errors } = this.props.profile;
 
+    // если name пустой, то кнопку назад не показывать
+    let canBackBtn;
+    if (this.props.profile.name) {
+      canBackBtn = true;
+    } else {
+      canBackBtn = false;
+    }
+
     return (
       <ProfileForm
         role={role}
@@ -64,6 +72,7 @@ class ProfileFormContainer extends Component {
         saveProfile={saveProfile}
         isLoading={isLoading}
         errors={errors}
+        canBackBtn={canBackBtn}
       />
     );
   }
