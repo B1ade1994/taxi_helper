@@ -54,9 +54,9 @@ const mapStateToProps = (store) => {
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    login: (phoneNumber, password) => dispatch(login(phoneNumber, password)),
+    login: (phoneNumber, password) => dispatch(login(phoneNumber, password, ownProps)),
   };
 };
 

@@ -3,6 +3,9 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable, :trackable,
          :jwt_authenticatable, jwt_revocation_strategy: JWTBlacklist
 
+  has_many :cars
+  has_many :orders, foreign_key: 'author_id'
+
   validates :phone_number,
             numericality: { only_integer: true },
             length: { is: 11 },
@@ -13,8 +16,6 @@ class User < ApplicationRecord
 
   before_create :generate_verify_token
   after_commit :send_verify_token, on: :create
-
-  has_many :cars
 
   accepts_nested_attributes_for :cars, allow_destroy: true
 

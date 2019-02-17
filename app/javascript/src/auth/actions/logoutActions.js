@@ -1,4 +1,4 @@
-import { logoutConstants } from 'src/constants';
+import { logoutConstants, profileConstants } from 'src/constants';
 import { api, setAuthToken } from 'src/_utils';
 
 function startLogout() {
@@ -9,6 +9,10 @@ function successLogout() {
   return { type: logoutConstants.LOGOUT_SUCCESS };
 }
 
+function unloadProfile() {
+  return { type: profileConstants.PROFILE_UNLOADED };
+}
+
 export function logout() {
   return (dispatch) => {
     dispatch(startLogout());
@@ -17,10 +21,10 @@ export function logout() {
       .then(() => {
         setAuthToken(false);
         dispatch(successLogout());
+        dispatch(unloadProfile());
       })
       .catch((error) => {
         console.log(error.response.data);
-        // dispatch(failLogin({ errors: error.response.data }));
       });
   };
 }

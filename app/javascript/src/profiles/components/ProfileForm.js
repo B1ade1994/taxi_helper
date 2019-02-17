@@ -9,7 +9,8 @@ export class ProfileForm extends Component {
   onSubmitBtnClickHandler = (e) => {
     e.preventDefault();
 
-    const { saveProfile, role, personalAccount, name, photo, cars } = this.props;
+    const { role, personalAccount, name, photo, cars } = this.props;
+    const { saveProfile } = this.props;
 
     saveProfile({ role, personalAccount, name, photo, cars_attributes: cars });
   }

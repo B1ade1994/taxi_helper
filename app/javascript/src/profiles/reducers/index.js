@@ -23,6 +23,8 @@ export function profileReducer(state = initialState, action) {
       return { ...state, isLoading: false, errors: {} };
     case profileConstants.SAVE_FAILURE:
       return { ...state, isLoading: false, errors: action.payload.errors };
+    case profileConstants.PROFILE_UNLOADED:
+      return initialState;
     default:
       return state;
   }

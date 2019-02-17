@@ -8,6 +8,7 @@ import { Menu, Dropdown, Container, Loader } from 'semantic-ui-react';
 import { onAppLoad, login, logout } from 'src/auth/actions';
 import { RegisterContainer, LoginContainer, VerifyContainer } from 'src/auth';
 import { ProfileContainer, ProfileFormContainer } from 'src/profiles';
+import { OrdersContainer, OrderContainer, OrderFormContainer } from 'src/orders';
 import { PrivateRoute, Home, InfoAgreement, Help } from './components';
 
 class Layout extends Component {
@@ -22,12 +23,20 @@ class Layout extends Component {
   }
 
   render() {
-    const { isAuthenticated, appLoaded, name } = this.props.auth;
+    const { auth } = this.props;
+    const { isAuthenticated, appLoaded, name } = auth;
 
     const authLinks = (
       <React.Fragment>
         <Menu.Item name="TaxiHelper" />
-        <Menu.Item name="Заказы" />
+        <Menu.Menu>
+          <Dropdown item text="Заказы" pointing>
+            <Dropdown.Menu>
+              <Dropdown.Item as={NavLink} to="/orders" exact>Мои заказы</Dropdown.Item>
+              <Dropdown.Item as={NavLink} to="/orders/new" exact>Создать заказ</Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
+        </Menu.Menu>
 
         <Menu.Menu position="right">
           <Dropdown item text={name} pointing>
@@ -71,10 +80,16 @@ class Layout extends Component {
                   <Route path="/info/agreement" component={InfoAgreement} />
                   <Route path="/login" component={LoginContainer} />
                   <Route path="/register" component={RegisterContainer} />
-                  <PrivateRoute exact path="/help" component={Help} auth={this.props.auth} />
-                  <PrivateRoute exact path="/verify" component={VerifyContainer} auth={this.props.auth} />
-                  <PrivateRoute exact path="/profile" component={ProfileContainer} auth={this.props.auth} />
-                  <PrivateRoute exact path="/profile/edit" component={ProfileFormContainer} auth={this.props.auth} />
+                  <PrivateRoute exact path="/help" component={Help} auth={auth} />
+                  <PrivateRoute exact path="/verify" component={VerifyContainer} auth={auth} />
+
+                  <PrivateRoute exact path="/profile" component={ProfileContainer} auth={auth} />
+                  <PrivateRoute exact path="/profile/edit" component={ProfileFormContainer} auth={auth} />
+
+                  <PrivateRoute exact path="/orders" component={OrdersContainer} auth={auth} />
+                  <PrivateRoute exact path="/orders/new" component={OrderFormContainer} auth={auth} />
+                  <PrivateRoute exact path="/orders/:id" component={OrderContainer} auth={auth} />
+                  <PrivateRoute exact path="/orders/:id/edit" component={OrderFormContainer} auth={auth} />
                 </Switch>
               </Container>
             </div>

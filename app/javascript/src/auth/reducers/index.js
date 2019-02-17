@@ -22,7 +22,7 @@ export function authReducer(state = initialState, action) {
       return { ...state, isLoading: true, errors: {} };
 
     case registerConstants.REGISTER_SUCCESS: case loginConstants.LOGIN_SUCCESS:
-      return {...state, isAuthenticated: true, isVerified: action.payload.verified, role: action.payload.role, name: action.payload.name || action.payload.phoneNumber, isLoading: false, errors: {} };
+      return { ...state, isAuthenticated: true, isVerified: action.payload.verified, role: action.payload.role, name: action.payload.name || action.payload.phoneNumber, isLoading: false, errors: {} };
 
     case registerConstants.REGISTER_FAILURE: case loginConstants.LOGIN_FAILURE: case verifyConstants.VERIFY_FAILURE: case verifyConstants.UPDATE_VERIFY_TOKEN_FAILURE:
       return { ...state, errors: action.payload.errors, isLoading: false };

@@ -27,6 +27,7 @@ export function saveProfile(profile, ownProps) {
 
     api.put('/profile', { user: profile })
       .then(() => {
+        // загрузить поля в auth редусер
         dispatch(setProfileAttrs({ role: profile.role, name: profile.name }));
 
         profile.cars = profile.cars_attributes;

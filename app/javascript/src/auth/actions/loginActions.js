@@ -21,7 +21,7 @@ function appLoaded() {
   return { type: commonConstants.APP_LOADED };
 }
 
-export function login(phoneNumber = null, password = null) {
+export function login(phoneNumber = null, password = null, ownProps = null) {
   return (dispatch) => {
     dispatch(startLogin());
 
@@ -35,6 +35,14 @@ export function login(phoneNumber = null, password = null) {
         dispatch(appLoaded());
         dispatch(loadProfile(data));
         dispatch(successLogin(data));
+
+        if (ownProps) {
+          if (data.name) {
+            ownProps.history.push('/orders');
+          } else {
+            ownProps.history.push('/profile/edit');
+          }
+        }
       })
       .catch((error) => {
         dispatch(appLoaded());

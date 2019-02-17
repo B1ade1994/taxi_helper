@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_13_122254) do
+ActiveRecord::Schema.define(version: 2019_02_11_170252) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,6 +30,29 @@ ActiveRecord::Schema.define(version: 2019_01_13_122254) do
     t.string "jti", null: false
     t.datetime "exp", null: false
     t.index ["jti"], name: "index_jwt_blacklist_on_jti"
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.bigint "user_id"
+    t.string "client_phone_number"
+    t.string "client_name"
+    t.string "address_start"
+    t.string "address_end"
+    t.string "flight_number"
+    t.string "comment"
+    t.date "taxi_arrival_dt"
+    t.time "taxi_arrival_tm"
+    t.integer "car_class"
+    t.integer "passenger_count"
+    t.integer "payment_method"
+    t.integer "status"
+    t.decimal "total_cost", precision: 6, scale: 2
+    t.decimal "dispatcher_commission", precision: 6, scale: 2
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["taxi_arrival_dt"], name: "index_orders_on_taxi_arrival_dt"
+    t.index ["taxi_arrival_tm"], name: "index_orders_on_taxi_arrival_tm"
+    t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|

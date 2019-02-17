@@ -29,6 +29,8 @@ export class Profile extends Component {
           <CarList cars={cars} />
         )}
 
+        <br />
+
         <Link to="/profile/edit">
           <Button secondary>Редактировать</Button>
         </Link>

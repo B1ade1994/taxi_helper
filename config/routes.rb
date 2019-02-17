@@ -8,6 +8,10 @@ Rails.application.routes.draw do
   get 'verify', to: 'welcome#index'
   get 'profile', to: 'welcome#index'
   get 'profile/edit', to: 'welcome#index'
+  get 'orders', to: 'welcome#index'
+  get 'orders/new', to: 'welcome#index'
+  get 'orders/:id', to: 'welcome#index'
+  get 'orders/:id/edit', to: 'welcome#index'
 
   namespace :api, defaults: { format: 'json' } do
     namespace :v1 do
@@ -22,6 +26,8 @@ Rails.application.routes.draw do
       put :verify, to: 'verify#update'
 
       put :profile, to: 'users#profile'
+
+      resources :orders, except: %i[new edit]
     end
   end
 end
