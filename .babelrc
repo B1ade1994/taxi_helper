@@ -1,7 +1,7 @@
 {
   "env": {
     "production": {
-      "plugins": ["react-remove-prop-types"]
+      "plugins": ["transform-react-remove-prop-types"]
     }
   },
   "presets": [
