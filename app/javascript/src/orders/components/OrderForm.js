@@ -45,6 +45,7 @@ export class OrderForm extends Component {
                 name="clientPhoneNumber"
                 value={clientPhoneNumber}
                 onChange={onChange}
+                required
                 mask="+7 (999) 999-99-99"
                 placeholder="Телефон клиента"
               />
@@ -66,6 +67,7 @@ export class OrderForm extends Component {
             name="addressStart"
             value={addressStart}
             onChange={onChange}
+            required
             placeholder="Адрес отправки"
             error={errors.address_start}
           />
@@ -74,6 +76,7 @@ export class OrderForm extends Component {
             name="addressEnd"
             value={addressEnd}
             onChange={onChange}
+            required
             placeholder="Адрес прибытия"
             error={errors.address_end}
           />
@@ -93,6 +96,7 @@ export class OrderForm extends Component {
             type="date"
             value={taxiArrivalDtFormat}
             onChange={onChange}
+            required
             placeholder="01.01.2018"
             error={errors.taxi_arrival_dt}
           />
@@ -102,6 +106,7 @@ export class OrderForm extends Component {
             type="time"
             value={taxiArrivalTm}
             onChange={onChange}
+            required
             placeholder="18:00"
             error={errors.taxi_arrival_tm}
           />
@@ -120,6 +125,7 @@ export class OrderForm extends Component {
           type="number"
           min={1}
           value={passengerCount}
+          required
           onChange={onChange}
           placeholder="Количество пассажиров"
           error={errors.passenger_count}
@@ -147,6 +153,7 @@ export class OrderForm extends Component {
           type="number"
           min={0}
           value={totalCost}
+          required
           onChange={onChange}
           placeholder="Общая стоимость"
           error={errors.total_cost}
@@ -157,6 +164,7 @@ export class OrderForm extends Component {
           type="number"
           min={0}
           value={dispatcherCommission}
+          required
           onChange={onChange}
           placeholder="Комиссия диспетчера"
           error={errors.dispatcher_commission}

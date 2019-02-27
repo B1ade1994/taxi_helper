@@ -50,6 +50,7 @@ export class ProfileForm extends Component {
           name="name"
           value={name}
           onChange={onChange}
+          required
           placeholder="Имя"
           error={_.has(errors, 'name')}
         />

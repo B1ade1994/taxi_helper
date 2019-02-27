@@ -33,7 +33,7 @@ ActiveRecord::Schema.define(version: 2019_02_11_170252) do
   end
 
   create_table "orders", force: :cascade do |t|
-    t.bigint "user_id"
+    t.bigint "author_id"
     t.string "client_phone_number"
     t.string "client_name"
     t.string "address_start"
@@ -52,7 +52,7 @@ ActiveRecord::Schema.define(version: 2019_02_11_170252) do
     t.datetime "updated_at", null: false
     t.index ["taxi_arrival_dt"], name: "index_orders_on_taxi_arrival_dt"
     t.index ["taxi_arrival_tm"], name: "index_orders_on_taxi_arrival_tm"
-    t.index ["user_id"], name: "index_orders_on_user_id"
+    t.index ["author_id"], name: "index_orders_on_author_id"
   end
 
   create_table "users", force: :cascade do |t|

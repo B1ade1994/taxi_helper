@@ -11,7 +11,7 @@ describe 'Profile API' do
 
     context 'authenticated' do
       context 'with valid params' do
-        it 'returns 201' do
+        it 'returns 204' do
           put '/api/v1/profile', params: { user: { name: 'Александр', personal_account: 'Das2WEsd12' } }.to_json, headers: auth_headers
           expect(response).to have_http_status(204)
         end

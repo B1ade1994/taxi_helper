@@ -14,11 +14,15 @@ export const orderConstants = {
 
   carClassOptions: [
     { text: 'Эконом', value: 'economy' },
+    { text: 'Универсал', value: 'wagon' },
+    { text: 'Комфорт', value: 'comfort' },
     { text: 'Бизнес', value: 'business' },
-    { text: 'Премиум', value: 'premium' },
+    { text: 'Минивэн', value: 'minivan' },
+    { text: 'Микроавтобус', value: 'minibus' },
+    { text: 'Автобус', value: 'bus' },
   ],
   paymentMethodOptions: [
-    { text: 'Наличными водителю', value: 'cash_to_driver' },
-    { text: 'Другое', value: 'another' },
+    { text: 'Наличными водителю', value: 'to_driver' },
+    { text: 'Перевод на карту (рнкб, QIWI и др.)', value: 'to_card' },
   ],
 };

@@ -30,7 +30,7 @@ export function saveProfile(profile, ownProps) {
         // загрузить поля в auth редусер
         dispatch(setProfileAttrs({ role: profile.role, name: profile.name }));
 
-        profile.cars = profile.cars_attributes;
+        profile.cars = profile.cars_attributes.filter(car => !car._destroy);
         delete profile.cars_attributes;
 
         dispatch(loadProfile(profile));

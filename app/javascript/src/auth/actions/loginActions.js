@@ -37,7 +37,9 @@ export function login(phoneNumber = null, password = null, ownProps = null) {
         dispatch(successLogin(data));
 
         if (ownProps) {
-          if (data.name) {
+          if (data.verified === false) {
+            ownProps.history.push('/verify');
+          } else if (data.name) {
             ownProps.history.push('/orders');
           } else {
             ownProps.history.push('/profile/edit');
