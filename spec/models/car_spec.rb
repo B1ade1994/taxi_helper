@@ -4,7 +4,7 @@ RSpec.describe Car, type: :model do
   subject { build(:car) }
 
   context 'associations' do
-     it { should belong_to(:user) }
+    it { should belong_to(:user) }
   end
 
   context 'validations' do

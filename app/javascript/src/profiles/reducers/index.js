@@ -8,6 +8,7 @@ const initialState = {
   personalAccount: '',
   name: '',
   photo: '',
+  rating: '0',
   cars: [],
   isLoading: false,
   errors: {},

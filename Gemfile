@@ -13,6 +13,7 @@ gem 'bootsnap', '>= 1.1.0', require: false
 gem 'devise', '~> 4.5.0'
 gem 'devise-jwt', '~> 0.5.8'
 gem 'responders'
+gem 'cancancan', '~> 2.0'
 
 group :development, :test do
   gem 'rspec-rails', '~> 3.8'

@@ -2,7 +2,7 @@ require 'rails_helper'
 require 'devise/jwt/test_helpers'
 
 describe 'Orders API' do
-  let!(:user) { create(:user, :verified) }
+  let!(:user) { create(:user, :verified, :dispatcher) }
   let(:headers) { { 'Accept' => 'application/json', 'Content-Type' => 'application/json' } }
   let(:auth_headers) { Devise::JWT::TestHelpers.auth_headers(headers, user) }
 

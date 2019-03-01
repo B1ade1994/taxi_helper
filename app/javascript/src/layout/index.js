@@ -29,27 +29,32 @@ class Layout extends Component {
     const authLinks = (
       <React.Fragment>
         <Menu.Item name="TaxiHelper" />
-        <Menu.Menu>
-          <Dropdown item text="Заказы" pointing>
-            <Dropdown.Menu>
-              <Dropdown.Item as={NavLink} to="/orders" exact>Мои заказы</Dropdown.Item>
-              <Dropdown.Item as={NavLink} to="/orders/new" exact>Создать заказ</Dropdown.Item>
-            </Dropdown.Menu>
-          </Dropdown>
-        </Menu.Menu>
+        {auth.isVerified && (
+          <Menu.Menu>
+            <Dropdown item text="Заказы" pointing>
+              <Dropdown.Menu>
+                {auth.role === 'driver' && (<Dropdown.Item as={NavLink} to="/orders" exact>Заказы</Dropdown.Item>)}
+                {auth.role === 'dispatcher' && (<Dropdown.Item as={NavLink} to="/orders" exact>Мои заказы</Dropdown.Item>)}
+                {auth.role === 'dispatcher' && (<Dropdown.Item as={NavLink} to="/orders/new" exact>Создать заказ</Dropdown.Item>)}
+              </Dropdown.Menu>
+            </Dropdown>
+          </Menu.Menu>
+        )}
 
-        <Menu.Menu position="right">
-          <Dropdown item text={name} pointing>
-            <Dropdown.Menu>
-              <Dropdown.Item as={NavLink} to="/profile" exact>Мой профиль</Dropdown.Item>
-              <Dropdown.Divider />
-              <Dropdown.Item as={NavLink} to="/profile/edit" exact>Редактировать</Dropdown.Item>
-              <Dropdown.Item as={NavLink} to="/help" exact>Помощь</Dropdown.Item>
-              <Dropdown.Divider />
-              <Dropdown.Item as={NavLink} onClick={this.props.logout} to="/" exact>Выйти</Dropdown.Item>
-            </Dropdown.Menu>
-          </Dropdown>
-        </Menu.Menu>
+        {auth.isVerified && (
+          <Menu.Menu position="right">
+            <Dropdown item text={name} pointing>
+              <Dropdown.Menu>
+                <Dropdown.Item as={NavLink} to="/profile" exact>Мой профиль</Dropdown.Item>
+                <Dropdown.Divider />
+                <Dropdown.Item as={NavLink} to="/profile/edit" exact>Редактировать</Dropdown.Item>
+                <Dropdown.Item as={NavLink} to="/help" exact>Помощь</Dropdown.Item>
+                <Dropdown.Divider />
+                <Dropdown.Item as={NavLink} onClick={this.props.logout} to="/" exact>Выйти</Dropdown.Item>
+              </Dropdown.Menu>
+            </Dropdown>
+          </Menu.Menu>
+        )}
       </React.Fragment>
     );
 

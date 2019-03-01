@@ -1,4 +1,5 @@
 class Api::V1::OrdersController < Api::V1::BaseController
+  load_and_authorize_resource
   before_action :load_order, only: %i[show update destroy]
 
   def index

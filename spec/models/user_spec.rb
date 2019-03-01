@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'cancan/matchers'
 
 RSpec.describe User, type: :model do
   subject { build(:user) }
@@ -90,6 +91,42 @@ RSpec.describe User, type: :model do
           subject.verify('123')
           expect(subject.verified?).to be(false)
         end
+      end
+    end
+  end
+
+  describe 'abilities' do
+    subject(:ability) { Ability.new(user) }
+
+    context 'Driver' do
+      let!(:user) { create(:user, :driver, :verified) }
+
+      it { is_expected.to be_able_to(:index, Order) }
+      it { is_expected.to_not be_able_to(:create, Order) }
+      it { is_expected.to_not be_able_to(:read, Order) }
+      it { is_expected.to_not be_able_to(:update, Order) }
+      it { is_expected.to_not be_able_to(:destroy, Order) }
+    end
+
+    context 'Dispatcher' do
+      let!(:user) { create(:user, :dispatcher, :verified) }
+      let!(:another_user) { create(:user, :dispatcher, :verified, phone_number: '72222222222') }
+      let!(:user_order) { create(:order, author: user) }
+      let!(:another_user_order) { create(:order, author: another_user) }
+
+      it { is_expected.to be_able_to(:index, Order) }
+      it { is_expected.to be_able_to(:create, Order) }
+
+      context "when user is order's author" do
+        it { is_expected.to be_able_to(:show, user_order) }
+        it { is_expected.to be_able_to(:update, user_order) }
+        it { is_expected.to be_able_to(:destroy, user_order) }
+      end
+
+      context "when user doesn'r order's author" do
+        it { is_expected.to_not be_able_to(:show, another_user_order) }
+        it { is_expected.to_not be_able_to(:update, another_user_order) }
+        it { is_expected.to_not be_able_to(:destroy, another_user_order) }
       end
     end
   end

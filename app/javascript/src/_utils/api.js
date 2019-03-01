@@ -15,9 +15,14 @@ const api = axios.create({
 api.interceptors.response.use(
   res => res,
   (err) => {
+    // ошибка аутентификации
     if (err.response.status === 401) {
       setAuthToken(false);
       store.dispatch({ type: logoutConstants.LOGOUT_SUCCESS });
+    }
+    // ошибка авторизации
+    if (err.response.status === 500) {
+      alert('Ошибка доступа');
     }
 
     return Promise.reject(err);

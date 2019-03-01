@@ -11,7 +11,7 @@ const initialState = {
   taxiArrivalTm: '',
   carClass: 'economy',
   passengerCount: '',
-  paymentMethod: 'cash_to_driver',
+  paymentMethod: 'to_driver',
   comment: '',
   totalCost: '',
   dispatcherCommission: '',

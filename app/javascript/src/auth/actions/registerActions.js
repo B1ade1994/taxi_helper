@@ -1,4 +1,4 @@
-import { registerConstants } from 'src/constants';
+import { registerConstants, profileConstants } from 'src/constants';
 import { api, setAuthToken } from 'src/_utils';
 
 function startRegister() {
@@ -13,6 +13,10 @@ function failRegister(errors) {
   return { type: registerConstants.REGISTER_FAILURE, payload: errors };
 }
 
+function loadProfile(profile) {
+  return { type: profileConstants.LOAD_PROFILE, payload: profile };
+}
+
 export function register(phoneNumber, password, passwordConfirmation) {
   return (dispatch) => {
     dispatch(startRegister());
@@ -22,6 +26,8 @@ export function register(phoneNumber, password, passwordConfirmation) {
       .then((response) => {
         const jwt = response.headers.authorization;
         setAuthToken(jwt);
+
+        dispatch(loadProfile(response.data));
         dispatch(successRegister(response.data));
       })
       .catch((error) => {
