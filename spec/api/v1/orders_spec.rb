@@ -6,6 +6,29 @@ describe 'Orders API' do
   let(:headers) { { 'Accept' => 'application/json', 'Content-Type' => 'application/json' } }
   let(:auth_headers) { Devise::JWT::TestHelpers.auth_headers(headers, user) }
 
+  describe 'GET /api/v1/orders' do
+    it_behaves_like 'API Authenticable'
+
+    context 'authenticated' do
+      context 'with valid params' do
+        before { create_list(:order, 3, author: user) }
+        before { get '/api/v1/orders', headers: auth_headers }
+
+        it 'returns 200' do
+          expect(response).to have_http_status(200)
+        end
+
+        it 'returns orders' do
+          expect(json.length).to eq(3)
+        end
+      end
+    end
+
+    def do_request(options = {})
+      get '/api/v1/orders', options
+    end
+  end
+
   describe 'POST /api/v1/orders' do
     it_behaves_like 'API Authenticable'
 
@@ -35,7 +58,7 @@ describe 'Orders API' do
     end
   end
 
-  describe 'put /api/v1/orders/:id' do
+  describe 'PUT /api/v1/orders/:id' do
     let!(:order) { create(:order, author: user) }
     it_behaves_like 'API Authenticable'
 
@@ -65,26 +88,21 @@ describe 'Orders API' do
     end
   end
 
-  describe 'get /api/v1/orders' do
+  describe 'GET /api/v1/orders/:id' do
+    let!(:order) { create(:order, author: user) }
     it_behaves_like 'API Authenticable'
 
     context 'authenticated' do
       context 'with valid params' do
-        before { create_list(:order, 3, author: user) }
-        before { get '/api/v1/orders', headers: auth_headers }
-
         it 'returns 200' do
+          get "/api/v1/orders/#{order.id}", headers: auth_headers
           expect(response).to have_http_status(200)
-        end
-
-        it 'returns orders' do
-          expect(json.length).to eq(3)
         end
       end
     end
 
     def do_request(options = {})
-      get '/api/v1/orders', options
+      get "/api/v1/orders/#{order.id}", options
     end
   end
 

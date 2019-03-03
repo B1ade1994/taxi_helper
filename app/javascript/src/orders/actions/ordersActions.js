@@ -52,7 +52,6 @@ export function createOrder(order, ownProps) {
         ownProps.history.push(`/orders/${response.data.id}`);
       })
       .catch((error) => {
-        console.log(error.response.data.errors);
         dispatch(saveFail({ errors: error.response.data.errors }));
       });
   };
@@ -88,11 +87,11 @@ export function getOrder(orderId) {
   };
 }
 
-export function getOrders() {
+export function getOrders(query = {}) {
   return (dispatch) => {
     dispatch(loadOrdersStart());
 
-    api.get('/orders')
+    api.get('/orders', { params: { query } })
       .then((response) => {
         dispatch(loadOrdersSuccess(response.data));
       })
@@ -115,6 +114,18 @@ export function updateOrderField(e, data) {
     }
 
     dispatch({ type: orderConstants.UPDATE_FIELD, name, value });
+  };
+}
+
+export function updateOrdersSearchBarField(e, data) {
+  return (dispatch) => {
+    let { name, value } = e.currentTarget;
+
+    if (name === undefined) {
+      ({ name, value } = data);
+    }
+
+    dispatch({ type: orderConstants.SEARCH_BAR_UPDATE_FIELD, name, value });
   };
 }
 

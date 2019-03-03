@@ -97,7 +97,6 @@ export class OrderForm extends Component {
             value={taxiArrivalDtFormat}
             onChange={onChange}
             required
-            placeholder="01.01.2018"
             error={errors.taxi_arrival_dt}
           />
           <Form.Input
@@ -107,7 +106,6 @@ export class OrderForm extends Component {
             value={taxiArrivalTm}
             onChange={onChange}
             required
-            placeholder="18:00"
             error={errors.taxi_arrival_tm}
           />
         </Form.Group>

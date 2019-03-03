@@ -2,6 +2,8 @@ import axios from 'axios';
 import { store } from 'src/store';
 import { logoutConstants } from 'src/constants';
 
+const Qs = require('qs');
+
 const API_ROOT = '/api/v1';
 const jwt = localStorage.getItem('jwt');
 
@@ -15,6 +17,10 @@ const api = axios.create({
 api.interceptors.response.use(
   res => res,
   (err) => {
+    console.log(3333);
+    console.log(err);
+    console.log(4444);
+
     // ошибка аутентификации
     if (err.response.status === 401) {
       setAuthToken(false);
@@ -28,6 +34,16 @@ api.interceptors.response.use(
     return Promise.reject(err);
   },
 );
+api.interceptors.request.use((config) => {
+  config.paramsSerializer = (params) => {
+    return Qs.stringify(params, {
+      arrayFormat: 'brackets',
+      encode: false,
+    });
+  };
+
+  return config;
+});
 
 const setAuthToken = (token) => {
   if (token) {

@@ -14,6 +14,7 @@ gem 'devise', '~> 4.5.0'
 gem 'devise-jwt', '~> 0.5.8'
 gem 'responders'
 gem 'cancancan', '~> 2.0'
+gem 'ransack', github: 'activerecord-hackery/ransack'
 
 group :development, :test do
   gem 'rspec-rails', '~> 3.8'

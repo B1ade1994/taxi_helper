@@ -11,8 +11,10 @@ export const orderConstants = {
   LOAD_ORDERS_REQUEST: 'LOAD_ORDERS_REQUEST',
   LOAD_ORDERS_SUCCESS: 'LOAD_ORDERS_SUCCESS',
   LOAD_ORDERS_FAILURE: 'LOAD_ORDERS_FAILURE',
+  SEARCH_BAR_UPDATE_FIELD: 'SEARCH_BAR_UPDATE_FIELD',
 
   carClassOptions: [
+    { text: 'Неважно', value: 'any' },
     { text: 'Эконом', value: 'economy' },
     { text: 'Универсал', value: 'wagon' },
     { text: 'Комфорт', value: 'comfort' },

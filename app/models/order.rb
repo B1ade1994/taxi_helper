@@ -22,7 +22,7 @@ class Order < ApplicationRecord
   validates :passenger_count,
             numericality: { only_integer: true, greater_than: 0 }
 
-  enum car_class: { economy: 0, business: 1, wagon: 2, comfort: 3, minivan: 4, minibus: 5, bus: 6 }
+  enum car_class: { any: 0, economy: 1, business: 2, wagon: 3, comfort: 4, minivan: 5, minibus: 6, bus: 7 }
   enum payment_method: { to_driver: 0, to_card: 1 }
   enum status: { actual: 0 }
 end

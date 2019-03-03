@@ -2,7 +2,7 @@ import './layout.scss';
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { BrowserRouter, Route, NavLink, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, NavLink, Link, Switch } from 'react-router-dom';
 import { Menu, Dropdown, Container, Loader } from 'semantic-ui-react';
 
 import { onAppLoad, login, logout } from 'src/auth/actions';
@@ -28,7 +28,7 @@ class Layout extends Component {
 
     const authLinks = (
       <React.Fragment>
-        <Menu.Item name="TaxiHelper" />
+        <Menu.Item as={Link} name="TaxiHelper" to="/orders" />
         {auth.isVerified && (
           <Menu.Menu>
             <Dropdown item text="Заказы" pointing>
